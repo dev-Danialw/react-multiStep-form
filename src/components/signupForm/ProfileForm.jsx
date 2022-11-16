@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSignupForm } from "../../context/SignupFormContext";
+import Animator from "../Animator";
 
 const ProfileForm = () => {
   const { profile, setProfile } = useSignupForm();
@@ -19,7 +20,7 @@ const ProfileForm = () => {
   };
 
   return (
-    <div>
+    <Animator>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <h2>About Yourself</h2>
 
@@ -51,7 +52,7 @@ const ProfileForm = () => {
 
         <input type="submit" value="Next" />
       </form>
-    </div>
+    </Animator>
   );
 };
 

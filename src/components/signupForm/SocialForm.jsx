@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSignupForm } from "../../context/SignupFormContext";
+import Animator from "../Animator";
 
 const SocialForm = () => {
   const { social, setSocial } = useSignupForm();
@@ -19,7 +20,7 @@ const SocialForm = () => {
   };
 
   return (
-    <div>
+    <Animator>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <h2>How can we find you on socials?</h2>
 
@@ -49,7 +50,7 @@ const SocialForm = () => {
 
         <input type="submit" value="Next" />
       </form>
-    </div>
+    </Animator>
   );
 };
 
