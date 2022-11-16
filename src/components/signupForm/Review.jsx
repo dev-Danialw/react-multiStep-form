@@ -2,12 +2,31 @@ import React from "react";
 import { useSignupForm } from "../../context/SignupFormContext";
 import Animator from "../Animator";
 
+// pocketbase
+import PocketBase from "pocketbase";
+const client = new PocketBase("http://127.0.0.1:8090");
+
 const ReviewForm = () => {
   const { profile, social } = useSignupForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Submitted");
+    create();
+  };
+
+  console.log(profile.name, profile.email);
+
+  // PB Create
+  const create = async () => {
+    await client.records.create("data", {
+      // profile
+      name: profile.name,
+      email: profile.email,
+
+      // social
+      fb: social.facebook,
+      insta: social.instagram,
+    });
   };
 
   return (
