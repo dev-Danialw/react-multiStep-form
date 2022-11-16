@@ -1,8 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useSignupForm } from "../../context/SignupFormContext";
 
 const SocialForm = () => {
+  const { social, setSocial } = useSignupForm();
   let navigate = useNavigate();
 
   const {
@@ -12,7 +14,7 @@ const SocialForm = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    setSocial(data);
     navigate("/review");
   };
 
@@ -24,6 +26,7 @@ const SocialForm = () => {
         <input
           type="text"
           name="facebook"
+          defaultValue={social.facebook}
           placeholder="What's your Facebook?"
           {...register("facebook", {
             required: true,
@@ -35,6 +38,7 @@ const SocialForm = () => {
         <input
           type="text"
           name="instagram"
+          defaultValue={social.instagram}
           placeholder="What's you Insta?"
           {...register("instagram", {
             required: true,
