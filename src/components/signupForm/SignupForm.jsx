@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 // Forms
 import ProfileForm from "./ProfileForm";
-import ReviewForm from "./ReviewForm";
+import ReviewForm from "./Review";
 import SocialForm from "./SocialForm";
 
 // steps links
