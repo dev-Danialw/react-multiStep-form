@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useSignupForm } from "../../context/SignupFormContext";
 import Animator from "../Animator";
 
@@ -7,14 +8,15 @@ import PocketBase from "pocketbase";
 const client = new PocketBase("http://127.0.0.1:8090");
 
 const ReviewForm = () => {
+  let navigate = useNavigate();
   const { profile, social } = useSignupForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     create();
-  };
 
-  console.log(profile.name, profile.email);
+    navigate("/preview");
+  };
 
   // PB Create
   const create = async () => {

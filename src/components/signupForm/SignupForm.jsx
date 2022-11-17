@@ -13,6 +13,7 @@ import StepLinks from "./StepLinks";
 
 // context
 import { SignupFormProvider } from "../../context/SignupFormContext";
+import Preview from "../Preview/Preview";
 
 const SignupForm = () => {
   const location = useLocation();
@@ -28,6 +29,7 @@ const SignupForm = () => {
             <Route path="/" exact element={<ProfileForm />} />
             <Route path="/social" element={<SocialForm />} />
             <Route path="/review" element={<ReviewForm />} />
+            <Route path="/preview" element={<Preview />} />
           </Routes>
         </AnimatePresence>
       </div>
