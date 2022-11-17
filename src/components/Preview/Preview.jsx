@@ -6,6 +6,7 @@ const client = new PocketBase("http://127.0.0.1:8090");
 const Preview = () => {
   const [details, setDetails] = useState([]);
 
+  // Read Data
   const getDetails = async () => {
     const data = await client.records.getList("data", 1, 20, {
       $autoCancel: false,
@@ -35,6 +36,7 @@ const Preview = () => {
               <th>Profile</th>
               <th>Socials</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
 
@@ -43,17 +45,6 @@ const Preview = () => {
               return <Details key={detail.id} detail={detail} />;
             })}
           </tbody>
-
-          {/* <!-- foot --> */}
-          <tfoot>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              {/* <th>Edit</th> */}
-              <th></th>
-            </tr>
-          </tfoot>
         </table>
       </div>
     </div>
@@ -62,8 +53,13 @@ const Preview = () => {
 
 export default Preview;
 
+// Delete Data
+async function deleteitem(id) {
+  await client.records.delete("data", id);
+}
+
 function Details({ detail }) {
-  const { name, email, fb, insta } = detail;
+  const { id, name, email, fb, insta } = detail;
 
   return (
     <tr>
@@ -95,7 +91,12 @@ function Details({ detail }) {
       </td>
 
       <th>
-        <button className="btn btn-ghost btn-xs">details</button>
+        <button className="btn btn-ghost btn-xs">Edit</button>
+      </th>
+      <th>
+        <button className="btn btn-ghost btn-xs" onClick={() => deleteitem(id)}>
+          Delete
+        </button>
       </th>
     </tr>
   );
