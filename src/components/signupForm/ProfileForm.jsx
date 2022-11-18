@@ -5,7 +5,7 @@ import { useSignupForm } from "../../context/SignupFormContext";
 import Animator from "../Animator";
 
 const ProfileForm = () => {
-  const { profile, setProfile } = useSignupForm();
+  const { profile, setProfile, social, setSocial } = useSignupForm();
   let navigate = useNavigate();
 
   const {
@@ -16,12 +16,15 @@ const ProfileForm = () => {
 
   const onSubmit = async (data) => {
     setProfile(data);
-    navigate("/social");
+    setSocial(data);
+    navigate("/review");
   };
 
   return (
     <Animator>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        {/* profile */}
+
         <h2>About Yourself</h2>
 
         <input
@@ -48,7 +51,33 @@ const ProfileForm = () => {
           })}
         />
 
-        {errors?.email && <p>A valid email is required.</p>}
+        <p>{errors?.email && "A valid email is required."}</p>
+
+        {/* socials */}
+
+        <input
+          type="text"
+          name="facebook"
+          defaultValue={social.facebook}
+          placeholder="What's your Facebook?"
+          {...register("facebook", {
+            required: true,
+          })}
+        />
+
+        <p>{errors?.facebook && "Facebook id is required."}</p>
+
+        <input
+          type="text"
+          name="instagram"
+          defaultValue={social.instagram}
+          placeholder="What's you Insta?"
+          {...register("instagram", {
+            required: true,
+          })}
+        />
+
+        <p>{errors?.instagram && "Instagram id is required."}</p>
 
         <input type="submit" value="Next" />
       </form>

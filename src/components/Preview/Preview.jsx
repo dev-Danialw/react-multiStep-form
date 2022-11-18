@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PocketBase from "pocketbase";
+import Animator from "../Animator";
 
 const client = new PocketBase("http://127.0.0.1:8090");
 
@@ -19,9 +20,7 @@ const Preview = () => {
   }, [details]);
 
   return (
-    <div>
-      <h2 className="text-2xl text-gray-600 font-semibold">Preview</h2>
-
+    <Animator>
       {/* table */}
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
@@ -47,7 +46,7 @@ const Preview = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </Animator>
   );
 };
 

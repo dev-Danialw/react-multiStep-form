@@ -9,7 +9,7 @@ const client = new PocketBase("http://127.0.0.1:8090");
 
 const ReviewForm = () => {
   let navigate = useNavigate();
-  const { profile, social } = useSignupForm();
+  const { profile, social, setProfile, setSocial } = useSignupForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +29,9 @@ const ReviewForm = () => {
       fb: social.facebook,
       insta: social.instagram,
     });
+
+    setProfile({});
+    setSocial({});
   };
 
   return (

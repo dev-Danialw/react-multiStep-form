@@ -6,7 +6,6 @@ import { AnimatePresence } from "framer-motion";
 // Forms
 import ProfileForm from "./ProfileForm";
 import ReviewForm from "./Review";
-import SocialForm from "./SocialForm";
 
 // steps links
 import StepLinks from "./StepLinks";
@@ -27,7 +26,6 @@ const SignupForm = () => {
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>
             <Route path="/" exact element={<ProfileForm />} />
-            <Route path="/social" element={<SocialForm />} />
             <Route path="/review" element={<ReviewForm />} />
             <Route path="/preview" element={<Preview />} />
           </Routes>

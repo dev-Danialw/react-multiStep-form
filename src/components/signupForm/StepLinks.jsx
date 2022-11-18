@@ -19,24 +19,18 @@ const StepLinks = () => {
       </NavLink>
 
       {isProfileDone ? (
-        <NavLink to="/social">
-          {isSocialDone ? "✅" : "🔘"} Social <span />
+        <NavLink to="/review">
+          {isSocialDone ? "✅" : "🔘"} Review <span />
         </NavLink>
       ) : (
         <a>
-          Social <span />
+          Review <span />
         </a>
       )}
 
-      {isProfileDone && isSocialDone ? (
-        <NavLink to="/review" style={{ float: "right" }}>
-          Review <span />
-        </NavLink>
-      ) : (
-        <a style={{ float: "right" }}>
-          Review <span />
-        </a>
-      )}
+      <NavLink to="preview">
+        {isProfileDone ? "🔘" : ""} Preview <span />
+      </NavLink>
     </div>
   );
 };

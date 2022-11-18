@@ -30,13 +30,16 @@ h6 {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+
+  padding-top: 4rem;
 }
 
 .signup-form {
   min-width: 500px;
   min-height: 600px;
+  /* min-height: 100vh; */
   position: relative;
 }
 
@@ -94,6 +97,8 @@ h6 {
   display: block;
   position: absolute;
   top: 40px;
+  left: 17px;
+
   height: 8px;
   width: 8px;
   border-radius: 50%;
