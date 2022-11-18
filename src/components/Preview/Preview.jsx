@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React from "react";
 import { useCollection } from "../../hooks/useCollection";
+import { useFirestore } from "../../hooks/useFirestore";
 import Animator from "../Animator";
 
 const Preview = () => {
-  // const [details, setDetails] = useState([]);
-
   const { documents, error } = useCollection("demo");
-  console.log(documents);
   return (
     <Animator>
       {/* table */}
@@ -33,22 +31,9 @@ const Preview = () => {
 
 export default Preview;
 
-// Delete Data
-// async function deleteitem(id) {
-
-// }
-
-// Edit data
-// async function edititem(id) {
-//   let name = prompt("Update Name:", id.name);
-//   let email = prompt("Update Email:", id.email);
-//   let fb = prompt("Update Facebook:", id.fb);
-//   let insta = prompt("Update Instagram:", id.insta);
-
-// }
-
 function Details({ detail }) {
   const { id, name, email, facebook, instagram } = detail;
+  const { deleteDocument } = useFirestore("demo");
 
   return (
     <tbody>
@@ -86,7 +71,7 @@ function Details({ detail }) {
         <th>
           <button
             className="btn btn-ghost btn-xs"
-            onClick={() => console.log("delete")}
+            onClick={() => console.log(deleteDocument(id))}
           >
             Delete
           </button>
