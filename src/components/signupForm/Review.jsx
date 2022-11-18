@@ -9,29 +9,23 @@ const client = new PocketBase("http://127.0.0.1:8090");
 
 const ReviewForm = () => {
   let navigate = useNavigate();
-  const { profile, social, setProfile, setSocial } = useSignupForm();
+  const { profile, setProfile } = useSignupForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     create();
-
     navigate("/preview");
   };
 
   // PB Create
   const create = async () => {
     await client.records.create("data", {
-      // profile
       name: profile.name,
       email: profile.email,
-
-      // social
-      fb: social.facebook,
-      insta: social.instagram,
+      fb: profile.facebook,
+      insta: profile.instagram,
     });
-
     setProfile({});
-    setSocial({});
   };
 
   return (
@@ -48,11 +42,11 @@ const ReviewForm = () => {
         </p>
 
         <p>
-          <strong>Facebook</strong>: {social.facebook}
+          <strong>Facebook</strong>: {profile.facebook}
         </p>
 
         <p>
-          <strong>Instagram</strong>: {social.instagram}
+          <strong>Instagram</strong>: {profile.instagram}
         </p>
 
         <input type="submit" value="Submit All Info" />

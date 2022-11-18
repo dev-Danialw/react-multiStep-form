@@ -7,10 +7,9 @@ export const isEmpty = (obj) => {
 };
 
 const StepLinks = () => {
-  const { profile, social } = useSignupForm();
+  const { profile } = useSignupForm();
 
   const isProfileDone = !isEmpty(profile);
-  const isSocialDone = !isEmpty(social);
 
   return (
     <div className="step-links">
@@ -20,7 +19,7 @@ const StepLinks = () => {
 
       {isProfileDone ? (
         <NavLink to="/review">
-          {isSocialDone ? "✅" : "🔘"} Review <span />
+          🔘 Review <span />
         </NavLink>
       ) : (
         <a>
@@ -29,7 +28,7 @@ const StepLinks = () => {
       )}
 
       <NavLink to="preview">
-        {isProfileDone ? "🔘" : ""} Preview <span />
+        🔘 Preview <span />
       </NavLink>
     </div>
   );
