@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from "react";
-import PocketBase from "pocketbase";
+import React, { useEffect, useState, useCallback } from "react";
+import { useCollection } from "../../hooks/useCollection";
 import Animator from "../Animator";
 
-const client = new PocketBase("http://127.0.0.1:8090");
-
 const Preview = () => {
-  const [details, setDetails] = useState([]);
+  // const [details, setDetails] = useState([]);
 
-  // Read Data
-  const getDetails = async () => {
-    const data = await client.records.getList("data", 1, 20, {
-      $autoCancel: false,
-    });
-    setDetails(data.items);
-  };
-
-  useEffect(() => {
-    getDetails();
-  }, [details]);
-
+  const { documents, error } = useCollection("demo");
+  console.log(documents);
   return (
     <Animator>
       {/* table */}
@@ -33,7 +21,8 @@ const Preview = () => {
             </tr>
           </thead>
 
-          {details?.map((detail) => {
+          {error && <p>{error}</p>}
+          {documents?.map((detail) => {
             return <Details key={detail.id} detail={detail} />;
           })}
         </table>
@@ -45,27 +34,21 @@ const Preview = () => {
 export default Preview;
 
 // Delete Data
-async function deleteitem(id) {
-  await client.records.delete("data", id);
-}
+// async function deleteitem(id) {
+
+// }
 
 // Edit data
-async function edititem(id) {
-  let name = prompt("Update Name:", id.name);
-  let email = prompt("Update Email:", id.email);
-  let fb = prompt("Update Facebook:", id.fb);
-  let insta = prompt("Update Instagram:", id.insta);
+// async function edititem(id) {
+//   let name = prompt("Update Name:", id.name);
+//   let email = prompt("Update Email:", id.email);
+//   let fb = prompt("Update Facebook:", id.fb);
+//   let insta = prompt("Update Instagram:", id.insta);
 
-  await client.records.update("data", id, {
-    name,
-    email,
-    fb,
-    insta,
-  });
-}
+// }
 
 function Details({ detail }) {
-  const { id, name, email, fb, insta } = detail;
+  const { id, name, email, facebook, instagram } = detail;
 
   return (
     <tbody>
@@ -87,20 +70,23 @@ function Details({ detail }) {
           </div>
         </td>
         <td>
-          {fb}
+          {facebook}
           <br />
-          <span className="text-sm opacity-50">{insta}</span>
+          <span className="text-sm opacity-50">{instagram}</span>
         </td>
 
         <th>
-          <button className="btn btn-ghost btn-xs" onClick={() => edititem(id)}>
+          <button
+            className="btn btn-ghost btn-xs"
+            onClick={() => console.log("edit")}
+          >
             Edit
           </button>
         </th>
         <th>
           <button
             className="btn btn-ghost btn-xs"
-            onClick={() => deleteitem(id)}
+            onClick={() => console.log("delete")}
           >
             Delete
           </button>

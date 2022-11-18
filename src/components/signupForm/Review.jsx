@@ -1,32 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSignupForm } from "../../context/SignupFormContext";
+import { useFirestore } from "../../hooks/useFirestore";
 import Animator from "../Animator";
-
-// pocketbase
-import PocketBase from "pocketbase";
-const client = new PocketBase("http://127.0.0.1:8090");
 
 const ReviewForm = () => {
   let navigate = useNavigate();
   const { profile, setProfile } = useSignupForm();
 
+  const { addDocument, response } = useFirestore("demo");
+
+  // add doc
   const handleSubmit = (e) => {
     e.preventDefault();
-    create();
+    addDocument({
+      ...profile,
+    });
     navigate("/preview");
   };
 
-  // PB Create
-  const create = async () => {
-    await client.records.create("data", {
-      name: profile.name,
-      email: profile.email,
-      fb: profile.facebook,
-      insta: profile.instagram,
-    });
-    setProfile({});
-  };
+  // reset the form
+  useEffect(() => {
+    if (response.sccess) {
+      setProfile({
+        name: "",
+        email: "",
+        phone: "",
+        imei: "",
+      });
+    }
+  }, [response.sccess]);
 
   return (
     <Animator>
