@@ -58,6 +58,16 @@ async function deleteitem(id) {
   await client.records.delete("data", id);
 }
 
+// Edit data
+async function edititem(id) {
+  let promptcar = prompt("update name", id.name);
+  let promptprice = prompt("update price", id.email);
+  await client.records.update("data", id, {
+    name: promptcar,
+    email: promptprice,
+  });
+}
+
 function Details({ detail }) {
   const { id, name, email, fb, insta } = detail;
 
@@ -91,7 +101,9 @@ function Details({ detail }) {
       </td>
 
       <th>
-        <button className="btn btn-ghost btn-xs">Edit</button>
+        <button className="btn btn-ghost btn-xs" onClick={() => edititem(id)}>
+          Edit
+        </button>
       </th>
       <th>
         <button className="btn btn-ghost btn-xs" onClick={() => deleteitem(id)}>
